@@ -1,6 +1,6 @@
 #!/bin/bash
 
-folder_path="/working/source"
+folder_path="/content/working/source"
 
 if [ ! -d "$folder_path" ]; then
     mkdir -p "$folder_path"
