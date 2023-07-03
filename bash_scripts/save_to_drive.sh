@@ -1,6 +1,7 @@
 #!/bin/bash
+cd /content/test_colab
 
-folder_path="/content/drive/MyDrive/Colab\ Notebooks/UNF_Fysik_Camp"
+folder_path="/content/drive/MyDrive/Colab Notebooks/UNF_Fysik_Camp/source"
 
 if [ ! -d "$folder_path" ]; then
     mkdir -p "$folder_path"
@@ -9,10 +10,17 @@ else
     echo "Folder already exists: $folder_path"
 fi
 
-cd /content/working
-
 ls | grep -E '.ipynb' | while read -r file; do
   cp "$file" "$folder_path/$new_filename"
 done
 
-echo "Files copied to: $folder_path"
+source_directory="/content/test_colab/"
+destination_directory="/content/drive/MyDrive/Colab Notebooks/UNF_Fysik_Camp"
+
+for file in "$source_directory"/*.ipynb; do
+  if [ ! -f "$destination_directory/$(basename "$file")" ]; then
+    cp "$file" "$destination_directory"
+  fi
+done
+
+echo "Finished"
